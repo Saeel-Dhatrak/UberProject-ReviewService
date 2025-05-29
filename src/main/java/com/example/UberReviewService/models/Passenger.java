@@ -19,9 +19,9 @@ public class Passenger extends BaseModel {
     @Column(nullable = false)
     private String name;
 
-    @OneToMany(mappedBy = "booking")
+    @OneToMany(mappedBy = "passenger")
     private List<Booking> bookings = new ArrayList<>();
 
-    @OneToMany(mappedBy = "review")
-    private List<Review> reviews = new ArrayList<>();
+//    @OneToMany(mappedBy = "review")
+//    private List<Review> reviews = new ArrayList<>();
 }

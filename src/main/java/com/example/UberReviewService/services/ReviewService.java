@@ -1,8 +1,10 @@
 package com.example.UberReviewService.services;
 
 import com.example.UberReviewService.models.Booking;
+import com.example.UberReviewService.models.Driver;
 import com.example.UberReviewService.models.Review;
 import com.example.UberReviewService.repositories.BookingRepository;
+import com.example.UberReviewService.repositories.DriverRepository;
 import com.example.UberReviewService.repositories.ReviewRepository;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Service;
@@ -16,10 +18,13 @@ public class ReviewService implements CommandLineRunner {
 
     private ReviewRepository reviewRepository;
     private BookingRepository bookingRepository;
+    private DriverRepository driverRepository;
 
-    public ReviewService(ReviewRepository reviewRepository, BookingRepository bookingRepository){
+    public ReviewService(ReviewRepository reviewRepository, BookingRepository bookingRepository,
+    DriverRepository driverRepository){
         this.reviewRepository = reviewRepository;
         this.bookingRepository = bookingRepository;
+        this.driverRepository = driverRepository;
     }
     @Override
     public void run(String... args) throws Exception {
@@ -46,9 +51,14 @@ public class ReviewService implements CommandLineRunner {
 
        // reviewRepository.deleteById(2L);
 
-        Optional<Booking> b =bookingRepository.findById(1L);
-        if(b.isPresent()){
-            bookingRepository.delete(b.get());
+        Optional<Driver> driver = driverRepository.findByIdAndLicenseNumber(1L,"MH34Aj6666");
+        if(driver.isPresent()){
+            System.out.println(driver.get().getName());
+            List<Booking> bookings = driver.get().getBookings();
+            for(Booking booking : bookings){
+                System.out.println(booking.getId());
+            }
         }
+
     }
 }
