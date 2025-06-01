@@ -13,7 +13,7 @@ import java.util.Date;
 @AllArgsConstructor
 public class Booking extends BaseModel {
 
-    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE}, fetch = FetchType.LAZY)
+    @OneToOne(cascade = {CascadeType.PERSIST, CascadeType.REMOVE})
     private Review review;
 
     @Enumerated(value = EnumType.STRING)
@@ -30,7 +30,7 @@ public class Booking extends BaseModel {
     @ManyToOne
     private Driver driver;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Passenger passenger;
 }
 
