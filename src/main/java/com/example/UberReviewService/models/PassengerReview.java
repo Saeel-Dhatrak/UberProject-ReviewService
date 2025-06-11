@@ -13,5 +13,4 @@ public class PassengerReview extends Review{
     private String passengerReviewContent;
     @Column(nullable = false)
     private String passengerRating;
-
 }
